@@ -3,8 +3,9 @@ import InfoModal from "../modals/InfoModal";
 import SimplePricing from "../pricings/SimplePricing";
 
 const TransactionTable = ({ editStatusTransaksiCallback, transactions, detailTransaksi,
-  sortProdukAToZ, sortProdukZToA, sortPelangganAToZ, sortPelangganZToA,
-  sortTanggalTerbaru, sortTanggalTerlama, sortTotalHargaTertinggi, sortTotalHargaTerendah,
+  sortKodeAToZ, sortKodeZToA, sortProdukAToZ, sortProdukZToA, 
+  sortPelangganAToZ, sortPelangganZToA, sortTanggalTerbaru, sortTanggalTerlama, 
+  sortTotalHargaTertinggi, sortTotalHargaTerendah,
   sortStatusAToZ, sortStatusZToA
 }) => {
   return (
@@ -15,6 +16,34 @@ const TransactionTable = ({ editStatusTransaksiCallback, transactions, detailTra
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
+                <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    <div className={"flex justify-between"}>
+                      <div>
+                        Kode Order
+                      </div>
+                      <div className={"flex gap-4 my-auto"}>
+                        <p
+                          onClick={() => {
+                            sortKodeAToZ();
+                          }}
+                          className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
+                          >
+                          <i className="fas fa-chevron-up"></i>
+                        </p>
+                        <p
+                          onClick={() => {
+                            sortKodeZToA();
+                          }}
+                          className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
+                          >
+                          <i className="fas fa-chevron-down"></i>
+                        </p>
+                      </div>
+                    </div>
+                  </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -166,6 +195,12 @@ const TransactionTable = ({ editStatusTransaksiCallback, transactions, detailTra
               <tbody className="bg-white divide-y divide-gray-200">
                 {transactions.map((transaksi, key) => (
                   <tr key={key}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">
+                        {" "}
+                        {transaksi.kode_odr}
+                      </div>
+                    </td>
                     <td 
                       className="px-6 py-4 whitespace-nowrap cursor-pointer"
                       onClick={() => {

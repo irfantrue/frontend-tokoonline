@@ -35,16 +35,6 @@ const Transaksi = () => {
   });
 
   useEffect(() => {
-    // getAllTransaksiProdukAToZ();
-    // getAllTransaksiProdukZToA();
-    // getAllTransaksiPelangganAToZ();
-    // getAllTransaksiPelangganZToA();
-    // getAllTransaksiTanggalTerbaru();
-    // getAllTransaksiTanggalTerlama();
-    // getAllTransaksiTotalHargaTertinggi();
-    // getAllTransaksiTotalHargaTerendah();
-    // getAllTransaksiStatusAtoZ();
-    // getAllTransaksiStatusZtoA();
     getAllTransaksi();
   }, []);
 
@@ -54,6 +44,22 @@ const Transaksi = () => {
       .then((response) => {
         setTransactions(response.data.data);
       });
+  };
+
+  const getAllTransaksiKodeAToZ = () => {
+    apiClient()
+      .get("/sort-admin-transaksi-kode-a-to-z")
+      .then((response) => {
+        setTransactions(response.data.data);
+      })
+  };
+
+  const getAllTransaksiKodeZToA = () => {
+    apiClient()
+      .get("/sort-admin-transaksi-kode-z-to-a")
+      .then((response) => {
+        setTransactions(response.data.data);
+      })
   };
 
   const getAllTransaksiProdukAToZ = () => {
@@ -206,7 +212,7 @@ const Transaksi = () => {
           for (let i = 0; i < response.data.data.length; i++) {
             info.push([
               response.data.data[i].Produk, 
-              response.data.data[i].Pelanggan,
+              response.data.data[i].kodeOrder,
               response.data.data[i].Pembayaran,
               response.data.data[i].Terjual,
               response.data.data[i].Total,
@@ -219,7 +225,7 @@ const Transaksi = () => {
             theme: "grid",
             headStyles: { halign: "center" },
             bodyStyles: { halign: "center" },
-            head: [["Produk", "Pelanggan", "Pembayaran", "Terjual", "Total", "Status", "Tanggal"]],
+            head: [["Produk", "Kode Order", "Pembayaran", "Terjual", "Total", "Status", "Tanggal"]],
             body: info
           })
   
@@ -277,7 +283,7 @@ const Transaksi = () => {
           setShowDetailTransaksi(false);
         }}
         showModal={showDetailTransaksi}
-        title={"Detail Transaksi: "+selectedTransaksi.nama_user}
+        title={"Detail Transaksi: "+selectedTransaksi.kode_odr}
       >
         <div className={"p-5 shadow"}>
           <div>
@@ -417,6 +423,8 @@ const Transaksi = () => {
             editStatusTransaksiCallback={editStatusTransaksiCallback}
             transactions={transactions}
             detailTransaksi={detailTransaksiCallback}
+            sortKodeAToZ={getAllTransaksiKodeAToZ}
+            sortKodeZToA={getAllTransaksiKodeZToA}
             sortProdukAToZ={getAllTransaksiProdukAToZ}
             sortProdukZToA={getAllTransaksiProdukZToA}
             sortPelangganAToZ={getAllTransaksiPelangganAToZ}
@@ -433,6 +441,8 @@ const Transaksi = () => {
             editStatusTransaksiCallback={editStatusTransaksiCallback}
             transactions={filteredPelanggan}
             detailTransaksi={detailTransaksiCallback}
+            sortKodeAToZ={getAllTransaksiKodeAToZ}
+            sortKodeZToA={getAllTransaksiKodeZToA}
             sortProdukAToZ={getAllTransaksiProdukAToZ}
             sortProdukZToA={getAllTransaksiProdukZToA}
             sortPelangganAToZ={getAllTransaksiPelangganAToZ}

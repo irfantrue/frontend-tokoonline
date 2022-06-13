@@ -39,7 +39,12 @@ const Pembayaran = () => {
         if (response.data.status === 404) {
           return false;
         }
-        setPembayaran(response.data.data);
+        else if (response.data.status === 200) {
+          setPembayaran(response.data.data)
+        }
+        else {
+          setPembayaran([]);
+        }
       });
   };
 
@@ -114,6 +119,7 @@ const Pembayaran = () => {
           setShowModal(false);
         }
       });
+      getAllPembayaran();
   };
 
   const detailPembayaranCallback = useCallback((id) => {
@@ -150,7 +156,7 @@ const Pembayaran = () => {
           setShowDetailPembayaran(false);
         }}
         showModal={showDetailPembayaran}
-        title="Detail Pembayaran"
+        title={"Detail Pembayaran:"+selectedPembayaran.kode_pby}
       >
         <div className={"p-5 shadow"}>
           <div>

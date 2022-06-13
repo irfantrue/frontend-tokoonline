@@ -16,10 +16,6 @@ const Kategori = () => {
 
   useEffect(() => {
     getAllCategories();
-    // getAllKategoriSortingNameAtoZ();
-    // getAllKategoriSortingNameZtoA();
-    // getAllKategoriSortingIdTerendah();
-    // getAllKategoriSortingIdTertinggi();
   }, []);
 
   const getAllCategories = () => {
@@ -28,6 +24,22 @@ const Kategori = () => {
       .then((response) => {
         setCategories(response.data.data);
       });
+  };
+
+  const getAllKategoriSortingKodeAtoZ = () => {
+    apiClient()
+      .get("/sorting-admin-kategori-kode-a-to-z")
+      .then((response) => {
+        setCategories(response.data.data);
+      })
+  };
+
+  const getAllKategoriSortingKodeZtoA = () => {
+    apiClient()
+      .get("/sorting-admin-kategori-kode-z-to-a")
+      .then((response) => {
+        setCategories(response.data.data);
+      })
   };
 
   const getAllKategoriSortingNameAtoZ = () => {
@@ -302,6 +314,8 @@ const Kategori = () => {
             categories={categories}
             callbackEditModal={callbackEditModal}
             callbackDelete={callbackDelete}
+            sortingKodeAtoZ={getAllKategoriSortingKodeAtoZ}
+            sortingKodeZtoA={getAllKategoriSortingKodeZtoA}
             sortingAtoZ={getAllKategoriSortingNameAtoZ}
             sortingZtoA={getAllKategoriSortingNameZtoA}
             sortingIdTerendah={getAllKategoriSortingIdTerendah}
@@ -312,6 +326,8 @@ const Kategori = () => {
             categories={filteredNamaKategori}
             callbackEditModal={callbackEditModal}
             callbackDelete={callbackDelete}
+            sortingKodeAtoZ={getAllKategoriSortingKodeAtoZ}
+            sortingKodeZtoA={getAllKategoriSortingKodeZtoA}
             sortingAtoZ={getAllKategoriSortingNameAtoZ}
             sortingZtoA={getAllKategoriSortingNameZtoA}
             sortingIdTerendah={getAllKategoriSortingIdTerendah}

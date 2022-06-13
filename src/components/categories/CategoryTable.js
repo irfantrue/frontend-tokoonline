@@ -1,4 +1,5 @@
 const CategoryTable = ({ categories, callbackEditModal, callbackDelete, 
+  sortingKodeAtoZ, sortingKodeZtoA,
   sortingAtoZ, sortingZtoA, sortingIdTerendah, sortingIdTertinggi }) => {
   return (
     <div className="flex flex-col mt-8">
@@ -14,12 +15,12 @@ const CategoryTable = ({ categories, callbackEditModal, callbackDelete,
                   >
                     <div className={"flex justify-between"}>
                       <div>
-                        ID Kategori
+                        Kode Kategori
                       </div>
                       <div className={"flex gap-4 my-auto"}>
                         <p
                           onClick={() => {
-                            sortingIdTertinggi();
+                            sortingKodeAtoZ();
                           }}
                           className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
                           >
@@ -27,7 +28,7 @@ const CategoryTable = ({ categories, callbackEditModal, callbackDelete,
                         </p>
                         <p
                           onClick={() => {
-                            sortingIdTerendah();
+                            sortingKodeZtoA();
                           }}
                           className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
                           >
@@ -77,7 +78,7 @@ const CategoryTable = ({ categories, callbackEditModal, callbackDelete,
                   <tr key={key}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
-                        {category.id}
+                        {category.kode_ktr}
                       </div>
                     </td>
 

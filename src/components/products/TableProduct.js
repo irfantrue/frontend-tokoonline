@@ -1,6 +1,7 @@
 import SimplePricing from "../pricings/SimplePricing";
 
-const TableProduct = ({ products, callbackEditProduct, deleteProduct, 
+const TableProduct = ({ products, callbackEditProduct, deleteProduct,
+  sortingKodeAtoZ, sortingKodeZtoA,
   sortingAtoZ, sortingZtoA, sortingLowestPrice, sortingHighestPrice,
   sortingKategoriAtoZ, sortingKategoriZtoA }) => {  
   return (
@@ -11,6 +12,34 @@ const TableProduct = ({ products, callbackEditProduct, deleteProduct,
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    <div className={"flex justify-between"}>
+                      <div>
+                        Kode Produk
+                      </div>
+                      <div className={"flex gap-4 my-auto"}>
+                        <p
+                          onClick={() => {
+                            sortingKodeAtoZ();
+                          }}
+                          className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
+                          >
+                          <i className="fas fa-chevron-up"></i>
+                        </p>
+                        <p
+                          onClick={() => {
+                            sortingKodeZtoA();
+                          }}
+                          className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
+                          >
+                          <i className="fas fa-chevron-down"></i>
+                        </p>
+                      </div>
+                    </div>
+                  </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -106,6 +135,12 @@ const TableProduct = ({ products, callbackEditProduct, deleteProduct,
               <tbody className="bg-white divide-y divide-gray-200">
                 {products.map((product, key) => (
                   <tr key={key}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">
+                        {product.kode_prd}
+                      </div>
+                    </td>
+
                     <td className="px-6 py-4 whitespace-nowrap cursor-pointer">
                       <div className="flex items-center">
                         <div className="flex-shrink-0 h-10 w-10">

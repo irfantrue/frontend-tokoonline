@@ -22,16 +22,6 @@ const Pembayaran = () => {
 
   useEffect(() => {
     getAllPembayaran();
-    // sortDetailAToZ();
-    // sortDetailZToA();
-    // sortTeleponTertinggi();
-    // sortTeleponTerendah();
-    // sortNamaAToZ();
-    // sortNamaZToA();
-    // sortTotalHargaTertinggi();
-    // sortTotalHargaTerendah();
-    // sortStatusAToZ();
-    // sortStatusZToA();
   }, []);
 
   const getAllPembayaran = () => {
@@ -43,6 +33,22 @@ const Pembayaran = () => {
         }
         setPembayaran(response.data.data);
       });
+  };
+
+  const sortPembayaranKodeAToZ = () => {
+    apiClient()
+      .get("/sort-admin-pembayaran-kode-a-to-z")
+      .then((response) => {
+        setPembayaran(response.data.data);
+      })
+  };
+
+  const sortPembayaranKodeZToA = () => {
+    apiClient()
+      .get("/sort-admin-pembayaran-kode-z-to-a")
+      .then((response) => {
+        setPembayaran(response.data.data);
+      })
   };
 
   const sortDetailAToZ = () => {
@@ -197,7 +203,7 @@ const Pembayaran = () => {
           setShowDetailPembayaran(false);
         }}
         showModal={showDetailPembayaran}
-        title={"Detail Pembayaran: "+selectedPembayaran.fullname}
+        title={"Detail Pembayaran: "+selectedPembayaran.kode_pby}
       >
         <div className={"p-5 shadow"}>
           <div>
@@ -242,15 +248,14 @@ const Pembayaran = () => {
       </InfoModal>
 
       <div className={"flex jutify-between"}>
-        
-      </div>
         <MainTextInput
           className={"w-96"}
           onChange={(e) => {
           setSearch(e.target.value);
           }}
           placeholder={"Cari pelanggan"}
-        />
+        />        
+      </div>
       <div>
         <div className={"mt-4"}>
           {pembayaran.length === 0 ? (
@@ -258,6 +263,8 @@ const Pembayaran = () => {
               detailPayment={detailPaymentCallback}
               editStatusPembayaranCallback={editCallback}
               pembayarans={pembayaran}
+              sortKodeAToZ={sortPembayaranKodeAToZ}
+              sortKodeZToA={sortPembayaranKodeZToA}
               sortDetailAToZ={sortDetailAToZ}
               sortDetailZToA={sortDetailZToA}
               sortTeleponTertinggi={sortTeleponTertinggi}
@@ -274,6 +281,8 @@ const Pembayaran = () => {
               detailPayment={detailPaymentCallback}
               editStatusPembayaranCallback={editCallback}
               pembayarans={filteredPelanggan}
+              sortKodeAToZ={sortPembayaranKodeAToZ}
+              sortKodeZToA={sortPembayaranKodeZToA}
               sortDetailAToZ={sortDetailAToZ}
               sortDetailZToA={sortDetailZToA}
               sortTeleponTertinggi={sortTeleponTertinggi}

@@ -31,6 +31,22 @@ const Product = (callback, deps) => {
   });
   const [search, setSearch] = useState("");
 
+  const getAllProductSortingKodeAtoZ = () => {
+    apiClient()
+      .get("/sorting-produk-kode-a-to-z")
+      .then((response) => {
+        setProducts(response.data.data);
+      })
+  };
+
+  const getAllProductSortingKodeZtoA = () => {
+    apiClient()
+      .get("/sorting-produk-kode-z-to-a")
+      .then((response) => {
+        setProducts(response.data.data);
+      })
+  };
+
   const getAllProductSortingNameAtoZ = () => {
     apiClient()
       .get("/sorting-nama-produk-a-to-z")
@@ -467,6 +483,8 @@ const Product = (callback, deps) => {
             products={products}
             deleteProduct={deleteProduct}
             callbackEditProduct={callbackEditProduct}
+            sortingKodeAtoZ={getAllProductSortingKodeAtoZ}
+            sortingKodeZtoA={getAllProductSortingKodeZtoA}
             sortingAtoZ={getAllProductSortingNameAtoZ}
             sortingZtoA={getAllProductSortingNameZtoA}
             sortingKategoriAtoZ={getAllProductSortingKategoriAtoZ}
@@ -479,6 +497,8 @@ const Product = (callback, deps) => {
             products={filteredNamaProduk}
             deleteProduct={deleteProduct}
             callbackEditProduct={callbackEditProduct}
+            sortingKodeAtoZ={getAllProductSortingKodeAtoZ}
+            sortingKodeZtoA={getAllProductSortingKodeZtoA}
             sortingAtoZ={getAllProductSortingNameAtoZ}
             sortingZtoA={getAllProductSortingNameZtoA}
             sortingKategoriAtoZ={getAllProductSortingKategoriAtoZ}

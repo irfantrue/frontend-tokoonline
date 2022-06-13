@@ -111,7 +111,7 @@ const Transaksi = () => {
           setShowDetailTransaksi(false);
         }}
         showModal={showDetailTransaksi}
-        title={"Detail Transaksi"}
+        title={"Detail Transaksi:"+selectedTransaksi.kode_odr}
       >
         <div className={"p-5 shadow"}>
           <div>
