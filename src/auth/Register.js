@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import apiClient from "../components/services/ApiClient";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
+import TextField from '@mui/material/TextField';
 
 const Register = () => {
   const history = useHistory();
@@ -120,36 +121,81 @@ const Register = () => {
               <h1 className={"text-center font-medium text-2xl"}>Register</h1>
             </div>
           </div>
-          <div className={"grid grid-cols-2 gap-2"}>
-            <MainTextInput
-              onChange={(e) => {
-                setRegisterData({ ...registerData, namaLengkap: e.target.value });
-              }}
-              placeholder={"Input nama lengkap kamu disini"}
-              label={"Nama Lengkap"}
-            />
-            <MainTextInput
-              onChange={(e) => {
-                setRegisterData({ ...registerData, email: e.target.value });
-              }}
-              placeholder={"Input email kamu disni"}
-              label={"Email"}
-            />
-            <MainTextInput
-              onChange={(e) => {
-                setRegisterData({ ...registerData, phone: e.target.value });
-              }}
-              placeholder={"08xxxxxxxx"}
-              label={"Phone"}
-            />
-            <MainTextInput
-              onChange={(e) => {
-                setRegisterData({ ...registerData, password: e.target.value });
-              }}
-              type={"password"}
-              placeholder={"Input password kamu disini"}
-              label={"Password"}
-            />
+          <div className={"grid grid-cols-1 gap-2"}>
+            <div className={"grid grid-cols-2 gap-2"}>
+              <MainTextInput
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, namaLengkap: e.target.value });
+                }}
+                placeholder={"Input nama lengkap kamu disini"}
+                label={"Nama Lengkap"}
+              />
+              {/* <TextField
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, namaLengkap: e.target.value });
+                }}
+                id={"standard-basic"} 
+                label={"Nama Lengkap"}
+                variant={"standard" }
+                placeholder={"Input nama lengkap kamu disini"}
+                className={"flex-1 w-full"}
+              /> */}
+              <MainTextInput
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, email: e.target.value });
+                }}
+                placeholder={"Input email kamu disni"}
+                label={"Email"}
+              />
+              {/* <TextField
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, email: e.target.value });
+                }}
+                id={"standard-basic"} 
+                label={"Email Address"}
+                variant={"standard" }
+                placeholder={"Input email kamu disini"}
+                className={"flex-1 w-full"}
+              /> */}
+            </div>
+            <div className={"grid grid-cols-2 gap-2"}>
+              <MainTextInput
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, phone: e.target.value });
+                }}
+                placeholder={"08xxxxxxxx"}
+                label={"Phone"}
+              />
+              {/* <TextField
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, phone: e.target.value });
+                }}
+                id={"standard-basic"} 
+                label={"Phone"}
+                variant={"standard" }
+                placeholder={"08xxxxxxxx"}
+                className={"flex-1 w-full"}
+              /> */}
+              <MainTextInput
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, password: e.target.value });
+                }}
+                type={"password"}
+                placeholder={"Input password kamu disini"}
+                label={"Password"}
+              />
+              {/* <TextField
+                onChange={(e) => {
+                  setRegisterData({ ...registerData, password: e.target.value });
+                }}
+                id={"standard-basic"} 
+                type={"password"}
+                placeholder={"Input password kamu disini"}
+                label={"Password"}
+                variant={"standard"}
+                className={"flex-1 w-full"}
+              /> */}
+            </div>
           </div>
           {/* <div className={"grid grid-cols-2 gap-2"}> */}
             <MainTextArea
@@ -159,6 +205,17 @@ const Register = () => {
               placeholder={"Input alamat kamu disni"}
               label={"Alamat"}
             />
+            {/* <TextField
+              onChange={(e) => {
+                setRegisterData({ ...registerData, alamat: e.target.value });
+              }}            
+              id={"standard-textarea"}
+              label={"Alamat"}
+              placeholder={"Input alamat kamu disni"}
+              multiline
+              variant={"standard"}
+              className={"flex-1 w-full"}
+            /> */}
           {/* </div> */}
           <div className={"mt-8"}>
             <div className={"mb-2"}>

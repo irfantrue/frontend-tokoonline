@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import apiClient from "../components/services/ApiClient";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import TextField from '@mui/material/TextField';
 
 const Login = () => {
   const history = useHistory();
@@ -117,21 +118,48 @@ const Login = () => {
               <h1 className={"font-medium text-2xl text-center"}>Login</h1>
             </div>
           </div>
-          <MainTextInput
-            onChange={(e) => {
-              setLoginData({ ...loginData, email: e.target.value });
-            }}
-            placeholder={"Input email kamu disini"}
-            label={"Email Address"}
-          />
-          <MainTextInput
-            onChange={(e) => {
-              setLoginData({ ...loginData, password: e.target.value });
-            }}
-            type={"password"}
-            placeholder={"Input password kamu disini"}
-            label={"Password"}
-          />
+          <div>
+            <div className={"mb-6"}> 
+              <MainTextInput
+                onChange={(e) => {
+                  setLoginData({ ...loginData, email: e.target.value });
+                }}
+                placeholder={"Input email kamu disini"}
+                label={"Email Address"}
+              />
+              {/* <TextField 
+                onChange={(e) => {
+                  setLoginData({ ...loginData, email: e.target.value });
+                }}
+                id={"standard-basic"} 
+                label={"Email Address"}
+                variant={"standard" }
+                placeholder={"Input email kamu disini"}
+                className={"flex-1 w-full"}
+                /> */}
+            </div>
+            <div className={"mt-6"}>
+              {/* <TextField 
+                onChange={(e) => {
+                  setLoginData({ ...loginData, password: e.target.value });
+                }}
+                id={"standard-basic"} 
+                type={"password"}
+                placeholder={"Input password kamu disini"}
+                label={"Password"}
+                variant={"standard"}
+                className={"flex-1 w-full"}
+                /> */}
+              <MainTextInput
+                onChange={(e) => {
+                  setLoginData({ ...loginData, password: e.target.value });
+                }}
+                type={"password"}
+                placeholder={"Input password kamu disini"}
+                label={"Password"}
+              />
+            </div>
+          </div>
           <div className={"mt-8"}>
             <MainButton
               onClick={() => {

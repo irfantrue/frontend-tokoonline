@@ -6,6 +6,10 @@ import apiClient from "../../components/services/ApiClient";
 import { useEffect, useState } from "react";
 import useQuery from "../../components/services/UseQuery";
 import MainButton from "../../components/buttons/MainButton";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 
 const Products = () => {
   const query = useQuery();
@@ -33,7 +37,7 @@ const Products = () => {
 
   const getAllProductSortingNameAtoZ = () => {
     apiClient()
-      .get("/sorting-nama-produk-a-to-z")
+      .get("/sort-produk-by-kategori-a-to-z/" + category)
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -41,7 +45,7 @@ const Products = () => {
 
   const getAllProductSortingNameZtoA = () => {
     apiClient()
-      .get("/sorting-nama-produk-z-to-a")
+      .get("/sort-produk-by-kategori-z-to-a/" + category)
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -49,7 +53,7 @@ const Products = () => {
 
   const getAllProductSortingLowestPrice = () => {
     apiClient()
-      .get("/sorting-harga-produk-terendah")
+      .get("/sort-produk-by-kategori-harga-terendah/" + category)
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -57,7 +61,7 @@ const Products = () => {
 
   const getAllProductSortingHighestPrice = () => {
     apiClient()
-      .get("/sorting-harga-produk-tertinggi")
+      .get("/sort-produk-by-kategori-harga-tertinggi/" + category)
       .then((response) => {
         setProducts(response.data.data);
       })
@@ -66,15 +70,45 @@ const Products = () => {
   useEffect(() => {
     getAllProducts();
     getAllCategories();
-    // getAllProductSortingNameAtoZ();
-    // getAllProductSortingNameZtoA();
-    // getAllProductSortingLowestPrice();
-    // getAllProductSortingHighestPrice();
   }, [category]);
 
   const filteredProducts = products.filter((product) => {
     return product.nama_produk.toLowerCase().includes(search.toLowerCase());
   });
+
+  const buttons = [
+    <Button 
+      onClick={() => {
+        getAllProductSortingNameAtoZ();
+      }}
+      style={{ borderColor: "gray" }}
+    >
+      <span style={{ color: "black"}}>A - Z</span>
+    </Button>,
+    <Button 
+      onClick={() => {
+        getAllProductSortingNameZtoA();
+      }}
+      style={{ borderColor: "gray" }}
+    >
+      <span style={{ color: "black"}}>Z - A</span>    </Button>,
+    <Button 
+      onClick={() => {
+        getAllProductSortingLowestPrice();
+      }}
+      style={{ borderColor: "gray" }}
+    >
+      <span style={{ color: "black"}}>Harga Terendah</span>
+    </Button>,
+    <Button 
+      onClick={() => {
+        getAllProductSortingHighestPrice();
+      }}
+      style={{ borderColor: "gray" }}
+    >
+      <span style={{ color: "black"}}>Harga Tertinggi</span>
+    </Button>            
+  ]
 
   return (
     <Layout header={true} footer={true}>
@@ -84,6 +118,7 @@ const Products = () => {
             <MainSelectInput
               onChange={(e) => {
                 setCategory(e.target.value);
+                window.history.pushState(``, ``, "products?c=" + e.target.value, "_blank");
               }}
               value={category}
             >
@@ -105,37 +140,9 @@ const Products = () => {
           </div>
         </div>
           <div className={"mt-2 flex justify-center"}>
-            <MainButton
-              onClick={() => {
-                getAllProductSortingNameAtoZ();
-              }}
-              label={"A - Z"}
-              className={"mr-2"}
-            >
-            </MainButton>
-            <MainButton
-              onClick={() => {
-                getAllProductSortingNameZtoA();
-              }}
-              label={"Z - A"}
-              className={"mr-2"}
-            >
-            </MainButton>
-            <MainButton
-              onClick={(e) => {
-                getAllProductSortingLowestPrice();
-              }}
-              label={"Harga Terendah"}
-              className={"mr-2"}
-            >
-            </MainButton>
-            <MainButton
-              onClick={(e) => {
-                getAllProductSortingHighestPrice();
-              }}
-              label={"Harga Tertinggi"}
-            >
-            </MainButton>
+            <ButtonGroup size="large" color="success" aria-label="large button group">
+              {buttons}
+            </ButtonGroup>
           </div>
         <div className={"md:mt-24 mt-8"}>
           {products.length === 0 ? (
