@@ -115,12 +115,6 @@ const Product = (callback, deps) => {
   useEffect(() => {
     getAllCategories();
     getAllProducts();
-    // getAllProductSortingNameAtoZ();
-    // getAllProductSortingNameZtoA();
-    // getAllProductSortingKategoriAtoZ();
-    // getAllProductSortingKategoriZtoA();
-    // getAllProductSortingLowestPrice();
-    // getAllProductSortingHighestPrice();
   }, []);
 
   const callbackEditProduct = useCallback(
@@ -396,7 +390,7 @@ const Product = (callback, deps) => {
             });
           }}
         >
-          <option value={""}>Pilih Kategori</option>
+          <option value={""}>{selectedProduct.productCategory}</option>
           {categories.map((category, key) => (
             <option key={key} value={category.id}>
               {category.nama_kategori}

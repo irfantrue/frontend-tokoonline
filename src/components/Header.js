@@ -238,7 +238,7 @@ const Header = () => {
                   detailProfile()
                 }}
               >
-                <span className="block py-2 px-4 text-sm text-black hover:bg-gray-100">
+                <span className="cursor-pointer block py-2 px-4 text-sm text-black hover:bg-gray-100">
                   Profile
                 </span>                
               </li>
@@ -247,7 +247,7 @@ const Header = () => {
                   handleLogout();
                 }}
               >
-                <span className="block py-2 px-4 text-sm text-black hover:bg-gray-100">
+                <span className="cursor-pointer block py-2 px-4 text-sm text-black hover:bg-gray-100">
                   Log out
                 </span>
               </li>
