@@ -4,6 +4,7 @@ import MainSelectInput from "../forms/MainSelectInput";
 const PaymentTable = ({
   pembayarans,
   editStatusPembayaranCallback,
+  deletePembayaranById,
   detailPayment,
   sortKodeAToZ,
   sortKodeZToA,
@@ -276,6 +277,14 @@ const PaymentTable = ({
                           <option value={"Belum Lunas"}>Belum Lunas</option>
                           <option value={"Lunas"}>Lunas</option>
                         </MainSelectInput>
+                        <p
+                          onClick={() => {
+                            deletePembayaranById(product.id);
+                          }}
+                          className="text-red-600 hover:text-red-900 cursor-pointer"
+                        >
+                          <i className="fa-solid fa-trash mt-5"></i>
+                        </p>
                       </div>
                     </td>
                   </tr>

@@ -2,7 +2,8 @@ import MainSelectInput from "../forms/MainSelectInput";
 import InfoModal from "../modals/InfoModal";
 import SimplePricing from "../pricings/SimplePricing";
 
-const TransactionTable = ({ editStatusTransaksiCallback, transactions, detailTransaksi,
+const TransactionTable = ({ editStatusTransaksiCallback, deleteTransaksiById, 
+  transactions, detailTransaksi,
   sortKodeAToZ, sortKodeZToA, sortProdukAToZ, sortProdukZToA, 
   sortPelangganAToZ, sortPelangganZToA, sortTanggalTerbaru, sortTanggalTerlama, 
   sortTotalHargaTertinggi, sortTotalHargaTerendah,
@@ -252,6 +253,14 @@ const TransactionTable = ({ editStatusTransaksiCallback, transactions, detailTra
                           <option value={"Dikirim"}>Dikirim</option>
                           <option value={"Selesai"}>Selesai</option>
                         </MainSelectInput>
+                        <p
+                          onClick={() => {
+                            deleteTransaksiById(transaksi.id);
+                          }}
+                          className="text-red-600 hover:text-red-900 cursor-pointer"
+                        >
+                          <i className="fa-solid fa-trash mt-5"></i>
+                        </p>
                       </div>
                     </td>
                   </tr>

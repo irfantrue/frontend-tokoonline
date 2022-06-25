@@ -182,6 +182,42 @@ const Pembayaran = () => {
       });
   }, []);
 
+  const deletePembayaranById = useCallback((id) => {
+    apiClient()
+      .delete("/pembayaran/" + id)
+      .then((response) => {
+        if (response.data.status === 200) {
+          toast.success(response.data.msg, {
+            position: "top-right",
+            iconTheme: {
+              primary: "white",
+              secondary: "#0F9D58"
+            },
+            style: {
+              background: "#0F9D58",
+              color: "white"
+            }
+          });
+          getAllPembayaran();
+        }
+
+        else if (response.data.status === 404) {
+          toast.error(response.data.msg, {
+            position: "top-right",
+            iconTheme: {
+              primary: "white",
+              secondary: "red"
+            },
+            style: {
+              background: "#FF3727",
+              color: "white"
+            }
+          });
+          getAllPembayaran();
+        }
+      });
+  }, []);
+
   const detailPaymentCallback = useCallback((id) => {
     apiClient()
       .get("/pembayaran/" + id)
@@ -262,6 +298,7 @@ const Pembayaran = () => {
             <PaymentTable
               detailPayment={detailPaymentCallback}
               editStatusPembayaranCallback={editCallback}
+              deletePembayaranById={deletePembayaranById}
               pembayarans={pembayaran}
               sortKodeAToZ={sortPembayaranKodeAToZ}
               sortKodeZToA={sortPembayaranKodeZToA}
@@ -280,6 +317,7 @@ const Pembayaran = () => {
             <PaymentTable
               detailPayment={detailPaymentCallback}
               editStatusPembayaranCallback={editCallback}
+              deletePembayaranById={deletePembayaranById}
               pembayarans={filteredPelanggan}
               sortKodeAToZ={sortPembayaranKodeAToZ}
               sortKodeZToA={sortPembayaranKodeZToA}

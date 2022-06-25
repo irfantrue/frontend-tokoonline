@@ -261,7 +261,43 @@ const Transaksi = () => {
         }
       })
       .catch(err => console.log(err))
-  }
+  };
+
+  const deleteTransaksiById = useCallback((id) => {
+    apiClient()
+      .delete("/transaksi/" + id)
+      .then((response) => {
+        if (response.data.status === 200) {
+          toast.success(response.data.msg, {
+            position: "top-right",
+            iconTheme: {
+              primary: "white",
+              secondary: "#0F9D58"
+            },
+            style: {
+              background: "#0F9D58",
+              color: "white"
+            }
+          });
+          getAllTransaksi();
+        }
+
+        else if (response.data.status === 404) {
+          toast.error(response.data.msg, {
+            position: "top-right",
+            iconTheme: {
+              primary: "white",
+              secondary: "red"
+            },
+            style: {
+              background: "#FF3727",
+              color: "white"
+            }
+          });
+          getAllTransaksi();
+        }
+      });
+  }, []);
 
   const detailTransaksiCallback = useCallback((id) => {
     apiClient()
@@ -421,6 +457,7 @@ const Transaksi = () => {
         {transactions.length === 0 ? (
           <TransactionTable
             editStatusTransaksiCallback={editStatusTransaksiCallback}
+            deleteTransaksiById={deleteTransaksiById}
             transactions={transactions}
             detailTransaksi={detailTransaksiCallback}
             sortKodeAToZ={getAllTransaksiKodeAToZ}
@@ -439,6 +476,7 @@ const Transaksi = () => {
         ) : (
           <TransactionTable
             editStatusTransaksiCallback={editStatusTransaksiCallback}
+            deleteTransaksiById={deleteTransaksiById}
             transactions={filteredPelanggan}
             detailTransaksi={detailTransaksiCallback}
             sortKodeAToZ={getAllTransaksiKodeAToZ}
