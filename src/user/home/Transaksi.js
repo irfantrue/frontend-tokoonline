@@ -6,6 +6,7 @@ import apiClient from "../../components/services/ApiClient";
 import SimplePricing from "../../components/pricings/SimplePricing";
 import { toast } from "react-hot-toast";
 import InfoModal from "../../components/modals/InfoModal";
+import MainTextInput from "../../components/forms/MainTextInput";
 
 const Transaksi = () => {
   const [transaksi, setTransaksi] = useState([]);
@@ -25,6 +26,11 @@ const Transaksi = () => {
     tgl_pembelian: "",
     nama_produk: ""
   });
+  const [tanggal, setTanggal] = useState({
+    startDate: "",
+    endDate: ""
+  });
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getAllTransaksi();
@@ -40,6 +46,33 @@ const Transaksi = () => {
           setTransaksi([]);
         }
       });
+  };
+
+  const sortAllTransaksiByDate = () => {
+    apiClient()
+      .post("/transaksi-user-sort-by-date", {
+        startDate: tanggal.startDate,
+        endDate: tanggal.endDate
+      })
+      .then((response) => {
+        if (response.data.status === 200) {
+          setTransaksi(response.data.data);
+        } else if (response.data.status === 400) {
+          toast.error(response.data.msg, {
+            position: "top-right",
+            iconTheme: {
+              primary: "white",
+              secondary: "red"
+            },
+            style: {
+              background: "#FF3727",
+              color: "white"
+            }  
+          });
+        } else {
+          setTransaksi([]);
+        }
+      }).catch(err => console.log(err));
   };
 
   const deleteTransaksi = (id) => {
@@ -103,6 +136,10 @@ const Transaksi = () => {
       })
   }, []);
 
+    const filtered = transaksi.filter((transaction) => {
+      return transaction.nama_produk.toLowerCase().includes(search.toLowerCase());
+    });    
+  
   return (
     <Layout header={true} footer={true}>
 
@@ -199,10 +236,70 @@ const Transaksi = () => {
         </div>
 
       </InfoModal>
+      <div>
+        <div className={"flex justify-start"}>
+          <div style={{ width: "645px"}}>
+            <div style={{ width: "500px" }}>
+              <MainTextInput
+                className={"w-96"}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                placeholder={"Cari Transaksi"}
+              />
+            </div>
 
+          </div>
+          <div className="flex justify-content-center">
+            <div>
+              <MainTextInput
+                onChange={(e) => {
+                  setTanggal({
+                    ...tanggal,
+                    startDate: e.target.value,
+                  });
+                }}
+                type={"datetime-local"}
+              />
+            </div>
+            <p className={"mt-5 mr-3 ml-3"}>S/D</p>
+            <div>
+              <MainTextInput
+                onChange={(e) => {
+                  setTanggal({
+                    ...tanggal,
+                    endDate: e.target.value,
+                  });
+                }}
+                type={"datetime-local"}
+              />
+            </div>
+
+          </div>
+
+        </div>
+        <div className={"flex justify-center"}>
+          <MainButton
+            onClick={() => {
+              sortAllTransaksiByDate();
+            }}
+            className={"ml-2 mt-3"}
+            label={"SORT BY DATE"}
+          />
+        </div>
+        <div className={"flex justify-end"}>
+          <MainButton
+            onClick={() => {
+              window.location.reload();
+            }}
+            className={"ml-2 mt-3"}
+            label={"Reset Filter"}
+          />
+        </div>
+      </div>
       <div>
         <h1 className={"font-medium text-2xl"}>Transaksi</h1>
-        {transaksi.map((trans, key) => (
+        {filtered.map((trans, key) => (
           <div className={"p-4 bg-white-100 rounded-lg mt-2 border shadow-lg p-3 mb-5 bg-body rounded"} key={key}>
             <div className={"flex justify-between"} key={key}>
               <div className={"flex gap-2"}>

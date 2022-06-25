@@ -27,6 +27,11 @@ const Pembayaran = () => {
     total_harga: "",
     no_rek: "",
   });
+  const [tanggal, setTanggal] = useState({
+    startDate: "",
+    endDate: ""
+  });
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getAllPembayaran();
@@ -46,6 +51,33 @@ const Pembayaran = () => {
           setPembayaran([]);
         }
       });
+  };
+
+  const sortAllPembayaranByDate = () => {
+    apiClient()
+      .post("/pembayaran-user-sort-by-date", {
+        startDate: tanggal.startDate,
+        endDate: tanggal.endDate
+      })
+      .then((response) => {
+        if (response.data.status === 200) {
+          setPembayaran(response.data.data);
+        } else if (response.data.status === 400) {
+          toast.error(response.data.msg, {
+            position: "top-right",
+            iconTheme: {
+              primary: "white",
+              secondary: "red"
+            },
+            style: {
+              background: "#FF3727",
+              color: "white"
+            }  
+          });
+        } else {
+          setPembayaran([]);
+        }
+      }).catch(err => console.log(err));
   };
 
   const handleUploadFile = (e) => {
@@ -148,6 +180,10 @@ const Pembayaran = () => {
       })
   }, [])
 
+  const filtered = pembayaran.filter((pembayarans) => {
+    return pembayarans.desc.toLowerCase().includes(search.toLowerCase());
+  });
+
   return (
     <Layout header={true} footer={true}>
 
@@ -233,8 +269,70 @@ const Pembayaran = () => {
       </MainModal>
 
       <div>
+        <div className={"flex justify-start"}>
+          <div style={{ width: "645px"}}>
+            <div style={{ width: "500px" }}>
+              <MainTextInput
+                className={"w-96"}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
+                placeholder={"Cari Pembayaran"}
+              />
+            </div>
+
+          </div>
+          <div className="flex justify-content-center">
+            <div>
+              <MainTextInput
+                onChange={(e) => {
+                  setTanggal({
+                    ...tanggal,
+                    startDate: e.target.value,
+                  });
+                }}
+                type={"datetime-local"}
+              />
+            </div>
+            <p className={"mt-5 mr-3 ml-3"}>S/D</p>
+            <div>
+              <MainTextInput
+                onChange={(e) => {
+                  setTanggal({
+                    ...tanggal,
+                    endDate: e.target.value,
+                  });
+                }}
+                type={"datetime-local"}
+              />
+            </div>
+
+          </div>
+
+        </div>
+        <div className={"flex justify-center"}>
+          <MainButton
+            onClick={() => {
+              sortAllPembayaranByDate();
+            }}
+            className={"ml-2 mt-3"}
+            label={"SORT BY DATE"}
+          />
+        </div>
+        <div className={"flex justify-end"}>
+          <MainButton
+            onClick={() => {
+              window.location.reload();
+            }}
+            className={"ml-2 mt-3"}
+            label={"Reset Filter"}
+          />
+        </div>
+      </div>
+
+      <div>
         <h1 className={"font-medium text-2xl"}>Pembayaran</h1>
-        {pembayaran.map((trans, key) => (
+        {filtered.map((trans, key) => (
           <div className={"p-4 bg-white-100 rounded-lg mt-2 border shadow-lg p-3 mb-5 bg-body rounded"} key={key}>
             <div className={"flex justify-between"} key={key}>
               <div className={"flex gap-2"}>
