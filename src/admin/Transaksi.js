@@ -208,6 +208,7 @@ const Transaksi = () => {
           let doc = new jsPDF();
   
           let info = [];
+          let pendapatan = 0;
   
           for (let i = 0; i < response.data.data.length; i++) {
             info.push([
@@ -215,18 +216,22 @@ const Transaksi = () => {
               response.data.data[i].kodeOrder,
               response.data.data[i].Pembayaran,
               response.data.data[i].Terjual,
-              response.data.data[i].Total,
+              `Rp${String(response.data.data[i].Total).replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.")}`,
               response.data.data[i].Status,
               response.data.data[i].Tanggal
             ])
+            pendapatan += response.data.data[i].Total;
           }
   
+          pendapatan = String(pendapatan).replace(/(\d)(?=(\d{3})+(?!\d))/g, "1.");
+
           autoTable(doc, {
             theme: "grid",
             headStyles: { halign: "center" },
             bodyStyles: { halign: "center" },
             head: [["Produk", "Kode Order", "Pembayaran", "Terjual", "Total", "Status", "Tanggal"]],
-            body: info
+            body: info,
+            foot: [["Total Pendapatan", "", "", "", "", `Rp${pendapatan}`, ""]]
           })
   
           doc.save("table.pdf")
