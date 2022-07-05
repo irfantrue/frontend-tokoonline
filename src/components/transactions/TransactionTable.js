@@ -208,8 +208,8 @@ const TransactionTable = ({ editStatusTransaksiCallback, deleteTransaksiById,
                         detailTransaksi(transaksi.id)
                       }}
                     >
-                      <div className="text-sm text-gray-900">
-                        {transaksi.nama_produk}
+                      <div className="text-sm text-gray-900 font-medium">
+                        <u>{transaksi.nama_produk}</u>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">

@@ -231,8 +231,8 @@ const PaymentTable = ({
                           />
                         </div>
                         <div className="ml-4">
-                          <div className="text-sm text-gray-900">
-                            {product.desc}
+                          <div className="text-sm text-gray-900 font-medium">
+                            <u>{product.desc}</u>
                           </div>
                         </div>
                       </div>

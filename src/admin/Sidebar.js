@@ -1,6 +1,7 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, NavLink } from "react-router-dom";
 import Skeleton from "../components/skeletons/Skeleton";
 import SecondaryButton from "../components/buttons/SecondaryButton";
+const path = window.location.pathname;
 const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
   const history = useHistory();
   const handleRoute = (e) => {
@@ -23,7 +24,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
       >
         {/* Close button */}
         <button
-          className="md:hidden text-gray-500 hover:text-gray-400"
+          className={`md:hidden text-gray-500 hover:text-gray-400`}
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
@@ -50,64 +51,93 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-between flex-1 mt-6">
-          <nav>
-            <div className="last:mb-0">
-              <Link to="produk">
-                <SecondaryButton
+        <div className="flex flex-col justify-between text-center">
+          {/* <nav className={`last:mb-0 mb-7`}>
+            <div className={`last:mb-0 mb-7`}> */}
+              <NavLink 
+                to="produk" 
+                activeClassName="bg-gray-600"
+                className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
+              >
+                Produk
+                {/* <SecondaryButton
                   onClick={(e) => {
                     handleRoute(e);
                   }}
                   className={`w-full py-4`}
                   label="Produk"
-                />
-              </Link>
-            </div>{" "}
-            <div className="last:mb-0">
-              <Link to="kategori">
-                <SecondaryButton
+                /> */}
+              </NavLink>
+            {/* </div>{" "}
+            <div className="last:mb-0 mb-5 w-full"
+              style={{
+                width: "250px",
+                height: "35px"
+              }}              
+            > */}
+              <NavLink 
+                to="kategori"
+                activeClassName="bg-gray-600"
+                className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
+              >
+                Kategori
+                {/* <SecondaryButton
                   onClick={(e) => {
                     handleRoute(e);
                   }}
                   className={`w-full py-4`}
                   label="Kategori"
-                />
-              </Link>
-            </div>
-            <div className="mb-2 last:mb-0">
-              <Link to="transaksi">
-                <SecondaryButton
+                /> */}
+              </NavLink>
+            {/* </div>
+            <div className="mb-2 last:mb-0"> */}
+              <NavLink 
+                to="transaksi"
+                activeClassName="bg-gray-600"
+                className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
+              >
+                Transaksi
+                {/* <SecondaryButton
                   onClick={(e) => {
                     handleRoute(e);
                   }}
                   className={`w-full py-4`}
                   label="Transaksi"
-                />
-              </Link>
-            </div>
-            <div className="mb-2 last:mb-0">
-              <Link to="pembayaran">
-                <SecondaryButton
+                /> */}
+              </NavLink>
+            {/* </div>
+            <div className="mb-2 last:mb-0"> */}
+              <NavLink 
+                to="pembayaran"
+                activeClassName="bg-gray-600"
+                className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
+              >
+                Pembayaran
+                {/* <SecondaryButton
                   onClick={(e) => {
                     handleRoute(e);
                   }}
                   className={`w-full py-4`}
                   label="Pembayaran"
-                />
-              </Link>
-            </div>
-            <div className="mb-2 last:mb-0">
-              <Link to="/">
-                <SecondaryButton
+                /> */}
+              </NavLink>
+            {/* </div>
+            <div className="mb-2 last:mb-0"> */}
+              <NavLink 
+                to="/"
+                className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
+              >
+                Kembali
+                {/* <SecondaryButton
                   onClick={(e) => {
                     handleRoute(e);
                   }}
                   className={`w-full py-4`}
                   label="Kembali"
-                />
-              </Link>
-            </div>
-          </nav>
+                /> */}
+              </NavLink>
+            {/* </div>
+          </nav> */}
         </div>
       </div>
     </>

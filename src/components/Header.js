@@ -264,7 +264,7 @@ const Header = () => {
                   className={`block py-2 pr-4 pl-3 rounded text-gray-600 md:bg-transparent md:p-0 md:font-medium ${
                     path === "/" ? "text-green-600" : null
                   }`}
-                >
+                  >
                   Beranda
                 </Link>
               </li>
