@@ -232,7 +232,7 @@ const PaymentTable = ({
                         </div>
                         <div className="ml-4">
                           <div className="text-sm text-gray-900 font-medium">
-                            <u>{product.desc}</u>
+                            {product.desc}
                           </div>
                         </div>
                       </div>
@@ -264,6 +264,14 @@ const PaymentTable = ({
 
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className={"flex gap-4 my-auto"}>
+                        <p
+                          onClick={() => {
+                            detailPayment(product.id);
+                          }}
+                          className="text-blue-600 hover:text-red-900 cursor-pointer"
+                        >
+                          <i class="fa fa-info-circle mt-5"></i>
+                        </p>
                         <MainSelectInput
                           className={"w-fit"}
                           value={product.status}

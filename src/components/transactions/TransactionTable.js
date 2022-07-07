@@ -209,7 +209,7 @@ const TransactionTable = ({ editStatusTransaksiCallback, deleteTransaksiById,
                       }}
                     >
                       <div className="text-sm text-gray-900 font-medium">
-                        <u>{transaksi.nama_produk}</u>
+                        {transaksi.nama_produk}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -237,6 +237,14 @@ const TransactionTable = ({ editStatusTransaksiCallback, deleteTransaksiById,
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className={"flex gap-4 my-auto"}>
+                        <p
+                          onClick={() => {
+                            detailTransaksi(transaksi.id);
+                          }}
+                          className="text-blue-600 hover:text-red-900 cursor-pointer"
+                        >
+                          <i class="fa fa-info-circle mt-5"></i>
+                        </p>
                         <MainSelectInput
                           className={"w-fit"}
                           value={transaksi.status}
