@@ -56,7 +56,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
             <div className={`last:mb-0 mb-7`}> */}
               <NavLink 
                 to="produk" 
-                activeClassName="bg-gray-800"
+                activeClassName="bg-gray-600"
                 className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
               >
                 Produk
@@ -77,7 +77,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
             > */}
               <NavLink 
                 to="kategori"
-                activeClassName="bg-gray-800"
+                activeClassName="bg-gray-600"
                 className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
               >
                 Kategori
@@ -93,7 +93,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
             <div className="mb-2 last:mb-0"> */}
               <NavLink 
                 to="transaksi"
-                activeClassName="bg-gray-800"
+                activeClassName="bg-gray-600"
                 className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
               >
                 Transaksi
@@ -109,7 +109,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, route, data, loading }) => {
             <div className="mb-2 last:mb-0"> */}
               <NavLink 
                 to="pembayaran"
-                activeClassName="bg-gray-800"
+                activeClassName="bg-gray-600"
                 className={"my-2 font-medium text-base text-green-500 bg-green-50 duration-500 cursor-pointer hover:bg-green-100 py-2 px-2 rounded-lg"}
               >
                 Pembayaran

@@ -132,7 +132,6 @@ const Product = (callback, deps) => {
         productPrice: selectedProduct.harga,
         productImage: selectedProduct.image,
       });
-
       setShowEditProductModal(true);
     },
     [productImage, products]

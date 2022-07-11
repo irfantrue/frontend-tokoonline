@@ -4,6 +4,7 @@ import MainSelectInput from "../forms/MainSelectInput";
 const PaymentTable = ({
   pembayarans,
   editStatusPembayaranCallback,
+  editOngkir,
   deletePembayaranById,
   detailPayment,
   sortKodeAToZ,
@@ -271,6 +272,14 @@ const PaymentTable = ({
                           className="text-blue-600 hover:text-red-900 cursor-pointer"
                         >
                           <i class="fa fa-info-circle mt-5"></i>
+                        </p>
+                        <p
+                          onClick={() => {
+                            editOngkir(product.id);
+                          }}
+                          className="text-yellow-600 hover:text-yellow-900 cursor-pointer"
+                        >
+                          <i className="fa-solid fa-pen-to-square mt-5"></i>
                         </p>
                         <MainSelectInput
                           className={"w-fit"}
